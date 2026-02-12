@@ -7,8 +7,9 @@ export const DashboardMockup: React.FC = () => {
     <div className="relative bg-white rounded-[2rem] shadow-[0_40px_80px_-15px_rgba(106,13,173,0.15)] border border-slate-200 overflow-hidden w-full aspect-[16/11] flex max-w-[640px] mx-auto">
       {/* Sidebar */}
       <div className="w-14 md:w-40 bg-[#f8fafc] border-r border-slate-200 p-4 hidden md:flex flex-col gap-6">
-        <div className="mb-4 opacity-50">
-          <Logo className="h-4 md:h-5" />
+        <div className="mb-4">
+          {/* Logo artık şeffaf değil, tam netlikte görünecek */}
+          <Logo className="h-5 md:h-6" />
         </div>
         {[...Array(5)].map((_, i) => (
           <div key={i} className={`h-7 w-full rounded-lg flex items-center gap-3 px-2 ${i === 0 ? 'bg-worknitive text-white' : ''}`}>
@@ -41,16 +42,6 @@ export const DashboardMockup: React.FC = () => {
             <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-center">
               <div className="w-12 h-12 rounded-full border-[6px] border-slate-100 border-t-rose-400 rotate-12"></div>
             </div>
-          </div>
-
-          <div className="bg-white border border-slate-100 rounded-2xl p-4 space-y-3">
-             {[1, 2].map((_, i) => (
-               <div key={i} className="flex items-center gap-3 border-b border-slate-50 pb-2 last:border-0">
-                 <div className="w-5 h-5 rounded-full bg-slate-50 shrink-0"></div>
-                 <div className="h-2 w-full bg-slate-50 rounded"></div>
-                 <div className="h-2 w-10 bg-worknitive/10 rounded shrink-0"></div>
-               </div>
-             ))}
           </div>
         </div>
       </div>
