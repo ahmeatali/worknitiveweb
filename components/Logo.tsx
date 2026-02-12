@@ -1,47 +1,38 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 interface LogoProps {
   className?: string;
   variant?: 'light' | 'dark';
 }
 
+/**
+ * Worknitive Orijinal Logo Bileşeni
+ * Projenin kök dizinindeki 'logo.svg' dosyasını kullanır.
+ */
 export const Logo: React.FC<LogoProps> = ({ 
   className = "h-10", 
   variant = 'dark'
 }) => {
-  const color = variant === 'light' ? '#FFFFFF' : '#6a0dad';
+  const [error, setError] = useState(false);
 
-  return (
-    <div className={`inline-flex items-center gap-3 ${className} transition-all duration-300`}>
-      {/* İkon Kısmı: İki mor form */}
-      <svg 
-        viewBox="0 0 100 100" 
-        className="h-full w-auto shrink-0" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path 
-          d="M35 15L20 85H40L55 15H35Z" 
-          fill={color} 
-        />
-        <path 
-          d="M75 15L60 85H80L95 15H75Z" 
-          fill={color} 
-        />
-      </svg>
-
-      {/* Metin Kısmı: WORKNITIVE */}
-      <span 
-        className="font-[900] tracking-tighter text-slate-900" 
-        style={{ 
-          color: color, 
-          fontSize: '110%', // İkon yüksekliğine göre orantılı font boyutu
-          lineHeight: '1'
-        }}
-      >
+  // Eğer logo.svg yüklenemezse veya bulunamazsa kullanıcıya bilgi vermek için basit bir text fallback
+  if (error) {
+    return (
+      <span className={`font-black tracking-tighter text-xl ${variant === 'light' ? 'text-white' : 'text-worknitive'}`}>
         WORKNITIVE
       </span>
+    );
+  }
+
+  return (
+    <div className={`inline-flex items-center justify-start ${className} transition-all duration-300`}>
+      <img 
+        src="/logo.svg" 
+        alt="Worknitive" 
+        className={`h-full w-auto object-contain block ${variant === 'light' ? 'brightness-0 invert' : ''}`}
+        onError={() => setError(true)}
+      />
     </div>
   );
 };
