@@ -8,7 +8,7 @@ interface LogoProps {
 
 /**
  * Worknitive Orijinal Logo Bileşeni
- * Projenin kök dizinindeki 'logo.svg' dosyasını kullanır.
+ * Sadece kullanıcının sağladığı '/logo.svg' dosyasını kullanır.
  */
 export const Logo: React.FC<LogoProps> = ({ 
   className = "h-10", 
@@ -16,10 +16,9 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   const [error, setError] = useState(false);
 
-  // Eğer logo.svg yüklenemezse veya bulunamazsa kullanıcıya bilgi vermek için basit bir text fallback
   if (error) {
     return (
-      <span className={`font-black tracking-tighter text-xl ${variant === 'light' ? 'text-white' : 'text-worknitive'}`}>
+      <span className={`font-black tracking-tighter uppercase ${className.includes('h-6') ? 'text-sm' : 'text-xl'} ${variant === 'light' ? 'text-white' : 'text-worknitive'}`}>
         WORKNITIVE
       </span>
     );
