@@ -19,11 +19,11 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-4 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-10'}`}>
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-8'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="cursor-pointer group">
-          {/* Logo boyutları radikal şekilde büyütüldü: h-20 (80px) ve h-28 (112px) */}
-          <Logo className={scrolled ? "h-12 md:h-14" : "h-20 md:h-24 lg:h-28"} />
+          {/* Logo artık çok daha geniş bir alana yayılıyor */}
+          <Logo className={scrolled ? "h-14 md:h-16" : "h-24 md:h-28 lg:h-32"} />
         </div>
 
         <nav className="hidden lg:flex items-center gap-14">
