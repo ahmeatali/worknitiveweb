@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 
-// @ts-ignore
-import logoUrl from '../logo.svg';
+// Statik varlıklar için kök dizin referansı kullanıyoruz
+const logoUrl = '/logo.svg';
 
 interface LogoProps {
   className?: string;
@@ -40,13 +40,14 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (imgError) return FallbackLogo;
 
-  // div wrapper'ı yerine doğrudan img boyutlandırmasını sağlıyoruz
   return (
-    <img 
-      src={logoUrl} 
-      alt="Worknitive" 
-      className={`${className} w-auto object-contain block transition-all duration-300`}
-      onError={() => setImgError(true)}
-    />
+    <div className={`inline-flex items-center justify-start ${className} transition-all duration-300`}>
+      <img 
+        src={logoUrl} 
+        alt="Worknitive" 
+        className="h-full w-auto object-contain block scale-[1.6] origin-left" // Dahili boşlukları telafi etmek için scale eklendi
+        onError={() => setImgError(true)}
+      />
+    </div>
   );
 };
