@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Logo } from './Logo';
 
 type ModuleType = 'Anasayfa' | 'Harcamalar' | 'İzinler' | 'Yoklama' | 'Raporlar';
 
@@ -47,10 +48,10 @@ export const ProductShowcase: React.FC = () => {
           <div className="bg-slate-100 rounded-[3rem] p-4 md:p-8 shadow-2xl border border-slate-200">
             {/* Real App UI Container */}
             <div className="bg-white rounded-[2.5rem] overflow-hidden flex aspect-video shadow-inner min-h-[600px] border border-slate-200">
-              {/* Sidebar Mock - Updated with labels visible */}
+              {/* Sidebar Mock */}
               <div className="w-20 md:w-64 bg-[#f8fafc] border-r border-slate-200 flex flex-col p-4 md:p-6">
-                <div className="mb-12 text-worknitive font-[900] text-2xl italic tracking-tighter text-left px-2">
-                  WORKNITIVE
+                <div className="mb-12 px-2">
+                  <Logo className="h-6 md:h-7" />
                 </div>
                 <div className="space-y-4">
                   {modules.map((m) => (
@@ -72,7 +73,6 @@ export const ProductShowcase: React.FC = () => {
 
               {/* Main Content Mock */}
               <div className="flex-1 flex flex-col bg-[#fbfcfd]">
-                {/* Header Bar */}
                 <div className="h-16 bg-worknitive flex items-center justify-end px-6">
                   <div className="bg-white/10 px-4 py-2 rounded-lg text-white text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-white/20 transition-colors">
                     Tümü <span className="opacity-50 text-[10px]">▼</span>
@@ -82,7 +82,6 @@ export const ProductShowcase: React.FC = () => {
                 <div className="p-4 md:p-10 overflow-y-auto">
                   {activeModule === 'Anasayfa' && (
                     <div className="space-y-8 animate-fadeIn">
-                      {/* Updated Profile Card - Matching the Screenshot */}
                       <div className="bg-white px-10 py-10 rounded-[2.5rem] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] border border-slate-100 flex items-center gap-8 max-w-2xl">
                         <div className="w-32 h-32 rounded-full border-[1.5px] border-slate-100 p-1 shrink-0">
                           <img 
@@ -101,7 +100,6 @@ export const ProductShowcase: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Other Dashboard Widgets */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
                         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
                           <div className="text-[#1e293b] font-black mb-6 uppercase text-sm tracking-widest">Bekleyen İzin Onayları</div>
