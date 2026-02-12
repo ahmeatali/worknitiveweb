@@ -1,8 +1,5 @@
 
-import React, { useState } from 'react';
-
-// Statik varlıklar için kök dizin referansı kullanıyoruz
-const logoUrl = '/logo.svg';
+import React from 'react';
 
 interface LogoProps {
   className?: string;
@@ -13,41 +10,38 @@ export const Logo: React.FC<LogoProps> = ({
   className = "h-10", 
   variant = 'dark'
 }) => {
-  const [imgError, setImgError] = useState(false);
   const color = variant === 'light' ? '#FFFFFF' : '#6a0dad';
 
-  const FallbackLogo = (
-    <div className={`inline-flex items-center ${className} transition-all duration-300`}>
+  return (
+    <div className={`inline-flex items-center gap-3 ${className} transition-all duration-300`}>
+      {/* İkon Kısmı: İki mor form */}
       <svg 
-        viewBox="0 0 360 60" 
+        viewBox="0 0 100 100" 
+        className="h-full w-auto shrink-0" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-auto overflow-visible"
       >
-        <g transform="translate(10, 5)">
-          <path d="M0 5h18l-5 44H-5L0 5z" fill={color} />
-          <path d="M32 5h18l-5 44H27l5-44z" fill={color} />
-        </g>
-        <text 
-          x="100" y="48" fill={color} 
-          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '46px', letterSpacing: '-0.04em' }}
-        >
-          WORKNITIVE
-        </text>
+        <path 
+          d="M35 15L20 85H40L55 15H35Z" 
+          fill={color} 
+        />
+        <path 
+          d="M75 15L60 85H80L95 15H75Z" 
+          fill={color} 
+        />
       </svg>
-    </div>
-  );
 
-  if (imgError) return FallbackLogo;
-
-  return (
-    <div className={`inline-flex items-center justify-start ${className} transition-all duration-300`}>
-      <img 
-        src={logoUrl} 
-        alt="Worknitive" 
-        className="h-full w-auto object-contain block" // Gereksiz ölçeklendirme kaldırıldı
-        onError={() => setImgError(true)}
-      />
+      {/* Metin Kısmı: WORKNITIVE */}
+      <span 
+        className="font-[900] tracking-tighter text-slate-900" 
+        style={{ 
+          color: color, 
+          fontSize: '110%', // İkon yüksekliğine göre orantılı font boyutu
+          lineHeight: '1'
+        }}
+      >
+        WORKNITIVE
+      </span>
     </div>
   );
 };
