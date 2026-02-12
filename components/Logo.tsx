@@ -10,7 +10,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ 
-  className = "h-20", 
+  className = "h-10", 
   variant = 'dark'
 }) => {
   const [imgError, setImgError] = useState(false);
@@ -45,7 +45,7 @@ export const Logo: React.FC<LogoProps> = ({
       <img 
         src={logoUrl} 
         alt="Worknitive" 
-        className="h-full w-auto object-contain block scale-[1.6] origin-left" // Dahili boşlukları telafi etmek için scale eklendi
+        className="h-full w-auto object-contain block" // Gereksiz ölçeklendirme kaldırıldı
         onError={() => setImgError(true)}
       />
     </div>
