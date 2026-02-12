@@ -22,8 +22,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-6'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="cursor-pointer group flex items-center">
-          {/* Logo yüksekliği ideal B2B SaaS standartlarına (32px - 44px) getirildi */}
-          <Logo className={scrolled ? "h-8 md:h-9" : "h-10 md:h-11"} />
+          {/* logo.svg dosyasının yüksekliği header içinde dengelendi */}
+          <Logo className={scrolled ? "h-9 md:h-10" : "h-11 md:h-12"} />
         </div>
 
         <nav className="hidden lg:flex items-center gap-10">
