@@ -19,22 +19,23 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-xl py-4 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-8'}`}>
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-6'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="cursor-pointer group">
-          <Logo className={scrolled ? "h-8" : "h-10"} />
+          {/* Logo boyutu daha belirgin hale getirildi */}
+          <Logo className={scrolled ? "h-10 md:h-12" : "h-14 md:h-16"} />
         </div>
 
-        <nav className="hidden lg:flex items-center gap-10">
-          <button onClick={() => scrollToSection('features')} className="text-sm font-black text-slate-600 hover:text-worknitive uppercase tracking-widest transition-colors">Çözümler</button>
-          <button onClick={() => scrollToSection('how-it-works')} className="text-sm font-black text-slate-600 hover:text-worknitive uppercase tracking-widest transition-colors">Nasıl Çalışır?</button>
-          <button onClick={() => scrollToSection('faq')} className="text-sm font-black text-slate-600 hover:text-worknitive uppercase tracking-widest transition-colors">SSS</button>
+        <nav className="hidden lg:flex items-center gap-12">
+          <button onClick={() => scrollToSection('features')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">Çözümler</button>
+          <button onClick={() => scrollToSection('how-it-works')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">Nasıl Çalışır?</button>
+          <button onClick={() => scrollToSection('faq')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">SSS</button>
         </nav>
 
         <div className="flex items-center gap-4">
           <button 
             onClick={onDemoClick}
-            className="px-8 py-3.5 bg-worknitive text-white rounded-xl font-bold text-sm hover:bg-worknitive-dark transition-all shadow-xl shadow-worknitive/30 active:scale-95"
+            className="px-7 py-3 bg-worknitive text-white rounded-xl font-bold text-sm hover:bg-worknitive-dark transition-all shadow-lg shadow-worknitive/20 active:scale-95"
           >
             Ücretsiz Demo Al
           </button>
