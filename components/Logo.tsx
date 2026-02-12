@@ -10,7 +10,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ 
-  className = "h-12", 
+  className = "h-20", 
   variant = 'dark'
 }) => {
   const [imgError, setImgError] = useState(false);
@@ -40,14 +40,13 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (imgError) return FallbackLogo;
 
+  // div wrapper'ı yerine doğrudan img boyutlandırmasını sağlıyoruz
   return (
-    <div className={`inline-flex items-center ${className} transition-all duration-300`}>
-      <img 
-        src={logoUrl} 
-        alt="Worknitive" 
-        className="h-full w-auto object-contain block" // block ve object-contain ile tam uyum
-        onError={() => setImgError(true)}
-      />
-    </div>
+    <img 
+      src={logoUrl} 
+      alt="Worknitive" 
+      className={`${className} w-auto object-contain block transition-all duration-300`}
+      onError={() => setImgError(true)}
+    />
   );
 };
