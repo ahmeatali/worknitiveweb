@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-16">
           <div className="col-span-2">
-            <Logo className="h-8 mb-6" />
+            <Logo className="h-10 mb-6" />
             <p className="text-slate-500 max-w-sm mb-8">
               B2B SaaS platformumuzla harcama, PDKS, izin ve puantaj süreçlerini tek noktada birleştirerek İK ve finans operasyonlarını dijitalleştiriyoruz.
             </p>
