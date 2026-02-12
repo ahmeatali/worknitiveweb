@@ -11,8 +11,9 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      const offset = scrolled ? 80 : 100;
       window.scrollTo({
-        top: element.offsetTop - 100,
+        top: element.offsetTop - offset,
         behavior: 'smooth'
       });
     }
@@ -21,23 +22,50 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-6'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="cursor-pointer group flex items-center">
-          {/* Logo yüksekliği ideal B2B SaaS standartlarına çekildi */}
-          <Logo className={scrolled ? "h-8 md:h-9" : "h-10 md:h-11"} />
+        {/* Logo Bölümü */}
+        <div 
+          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} 
+          className="cursor-pointer group flex items-center shrink-0"
+        >
+          <Logo className={scrolled ? "h-10 md:h-12" : "h-12 md:h-16"} />
         </div>
 
-        <nav className="hidden lg:flex items-center gap-10">
-          <button onClick={() => scrollToSection('features')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">Çözümler</button>
-          <button onClick={() => scrollToSection('how-it-works')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">Nasıl Çalışır?</button>
-          <button onClick={() => scrollToSection('faq')} className="text-[13px] font-bold text-slate-500 hover:text-worknitive uppercase tracking-[0.15em] transition-colors">SSS</button>
+        {/* Navigasyon Linkleri - Desktop */}
+        <nav className="hidden lg:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
+          <button 
+            onClick={() => scrollToSection('features')} 
+            className="text-[13px] font-extrabold text-slate-500 hover:text-worknitive uppercase tracking-[0.2em] transition-colors"
+          >
+            Çözümler
+          </button>
+          <button 
+            onClick={() => scrollToSection('how-it-works')} 
+            className="text-[13px] font-extrabold text-slate-500 hover:text-worknitive uppercase tracking-[0.2em] transition-colors"
+          >
+            Nasıl Çalışır?
+          </button>
+          <button 
+            onClick={() => scrollToSection('faq')} 
+            className="text-[13px] font-extrabold text-slate-500 hover:text-worknitive uppercase tracking-[0.2em] transition-colors"
+          >
+            SSS
+          </button>
         </nav>
 
+        {/* Sağ Taraf - Aksiyon Butonu */}
         <div className="flex items-center gap-4">
           <button 
             onClick={onDemoClick}
-            className="px-7 py-3 bg-worknitive text-white rounded-xl font-bold text-sm hover:bg-worknitive-dark transition-all shadow-lg shadow-worknitive/20 active:scale-95"
+            className="px-6 md:px-8 py-3 bg-worknitive text-white rounded-xl font-bold text-sm hover:bg-worknitive-dark transition-all shadow-lg shadow-worknitive/20 active:scale-95"
           >
-            Ücretsiz Demo Al
+            <span className="hidden sm:inline">Ücretsiz</span> Demo Al
+          </button>
+          
+          {/* Mobil Menü İkonu (Görsel amaçlı) */}
+          <button className="lg:hidden p-2 text-slate-600">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
           </button>
         </div>
       </div>
