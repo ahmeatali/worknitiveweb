@@ -1,32 +1,27 @@
-
-# Worknitive Pro - Yayın ve Domain Rehberi
+# Worknitive Pro - Yayına Alma ve Alan Adı Rehberi
 
 Bu proje **Worknitive B2B SaaS** platformunun ana tanıtım sayfasıdır.
 
-## 🚀 Profesyonel Yayın (Vercel & Domain)
+## 🚀 Profesyonel Yayın (Önerilen)
 
-En iyi performans ve Google Play / SEO uyumluluğu için alan adınızı doğrudan Vercel'e yönlendirin:
+En iyi performans ve SEO için alan adınızı doğrudan Vercel'e yönlendirin:
 
-1. **Vercel Paneli:** Settings > Domains > Add **'worknitive.com'**
+1. **Vercel Paneli:** Settings > Domains > Add 'worknitive.com'
 2. **DNS Ayarları:**
    - **A Kaydı:** `@` -> `76.76.21.21`
    - **CNAME:** `www` -> `cname.vercel-dns.com`
 
-## 📱 Google Play Gizlilik Politikası URL'si
-Google Play Console üzerinde "Veri Güvenliği" kısmına girmeniz gereken link:
-`https://worknitive.com` (Sitedeki footer linkleri üzerinden politikaya erişilebilir)
+## 📥 WordPress Üzerinden Yayın
 
-## 📥 WordPress Üzerinden Yayın (Alternatif)
+Eğer WordPress kullanmaya devam etmek istiyorsanız:
 
-Eğer WordPress kullanıyorsanız, sayfanın bozulmaması için iframe metodunu kullanabilirsiniz:
-
-1. WordPress'te yeni bir sayfa açın.
+1. WordPress'te yeni bir sayfa açın ve "Sabit Sayfa" (Static Page) olarak ayarlayın.
 2. Aşağıdaki kodu "Özel HTML" bloğuna ekleyin:
 
 ```html
 <div style="width: 100vw; height: 100vh; overflow: hidden; position: fixed; top: 0; left: 0; z-index: 999999;">
     <iframe 
-        src="https://worknitive.com" 
+        src="https://SİZİN-VERCEL-LİNKİNİZ.vercel.app" 
         style="width: 100%; height: 100%; border: none;"
         title="Worknitive Landing Page">
     </iframe>
@@ -34,4 +29,4 @@ Eğer WordPress kullanıyorsanız, sayfanın bozulmaması için iframe metodunu 
 ```
 
 ---
-© 2025 Worknitive Bilişim ve Ticaret A.Ş.
+© 2025 Worknitive Bilişim A.Ş.

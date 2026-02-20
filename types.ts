@@ -1,5 +1,4 @@
 
-// Fix: Added React import to resolve the 'React' namespace error for React.ReactNode
 import React from 'react';
 
 export interface Feature {
@@ -7,6 +6,17 @@ export interface Feature {
   title: string;
   description: string;
   icon: React.ReactNode;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: 'İK' | 'Finans' | 'Yapay Zeka' | 'Teknoloji';
+  date: string;
+  readTime: string;
+  image: string;
 }
 
 export interface PricingPlan {

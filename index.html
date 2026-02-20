@@ -15,15 +15,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/png" href="/favicon.png">
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://worknitive.com" />
-    
     <!-- Open Graph (Sosyal Medya Paylaşımları İçin) -->
     <meta property="og:title" content="Worknitive | İK Süreçlerinde Zekayı Hissedin">
     <meta property="og:description" content="AI destekli İK ve Finans yönetim platformu ile operasyonel yükünüzü %40 azaltın.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://worknitive.com">
-    <meta property="og:image" content="https://worknitive.com/og-image.jpg">
+    <meta property="og:url" content="https://www.worknitive.com">
+    <meta property="og:image" content="https://www.worknitive.com/og-image.jpg">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -62,11 +59,6 @@
         .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
         
         * { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
-        
-        /* Custom scrollbar for legal texts */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #6a0dad; border-radius: 10px; }
     </style>
 <script type="importmap">
 {
@@ -76,7 +68,7 @@
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "vite": "https://esm.sh/esm.sh/vite@^7.3.1",
+    "vite": "https://esm.sh/vite@^7.3.1",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
@@ -93,9 +85,11 @@
     initApollo();
 </script>
 
+<link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
