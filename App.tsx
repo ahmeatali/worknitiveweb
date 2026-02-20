@@ -22,6 +22,7 @@ export const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [path, setPath] = useState(window.location.pathname);
 
+  // Sayfa değiştirme fonksiyonu
   const navigateTo = useCallback((newPath: string) => {
     window.history.pushState({}, '', newPath);
     setPath(newPath);
@@ -58,19 +59,25 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Yasal sayfa kontrolü
+  // Yasal sayfa rotaları
   const isLegalPage = ['/gizlilik', '/kvkk', '/kullanim-sartlari'].includes(path);
 
-  if (isLegalPage) {
+  // Render Logic
+  const renderLegalPage = () => {
     const type = path === '/gizlilik' ? 'privacy' : path === '/kvkk' ? 'kvkk' : 'terms';
     
     return (
       <div className="min-h-screen bg-white selection:bg-worknitive selection:text-white flex flex-col">
-        <Header scrolled={true} onDemoClick={handleDemoClick} />
+        <Header 
+          scrolled={true} 
+          onDemoClick={handleDemoClick} 
+          currentPath={path}
+          onNavigate={navigateTo}
+        />
         
         <main className="flex-1 pt-32 pb-24">
           <div className="container mx-auto px-6 max-w-4xl">
-            {/* Breadcrumb / Geri Dön */}
+            {/* Navigasyon / Geri Dön */}
             <button 
               onClick={() => navigateTo('/')}
               className="group mb-12 flex items-center gap-2 text-slate-400 hover:text-worknitive font-black text-[10px] uppercase tracking-[0.2em] transition-all"
@@ -82,16 +89,16 @@ export const App: React.FC = () => {
             </button>
 
             <article className="bg-slate-50 p-10 md:p-20 rounded-[4rem] border border-slate-100 shadow-sm animate-fadeIn">
-              <LegalContent type={type} />
+              <LegalContent type={type as 'privacy' | 'kvkk' | 'terms'} />
             </article>
 
             <div className="mt-12 p-8 bg-worknitive/5 rounded-[2.5rem] border border-worknitive/10 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
-                <h5 className="font-bold text-slate-900 mb-1 text-sm uppercase tracking-tight">Sorunuz mu var?</h5>
-                <p className="text-xs text-slate-500 font-medium tracking-tight">Hukuki süreçlerimiz hakkında detaylı bilgi için bize ulaşın.</p>
+                <h5 className="font-bold text-slate-900 mb-1 text-sm uppercase tracking-tight">Hukuki bir sorunuz mu var?</h5>
+                <p className="text-xs text-slate-500 font-medium tracking-tight">Süreçlerimiz hakkında daha fazla bilgi almak için hukuk ekibimizle iletişime geçebilirsiniz.</p>
               </div>
               <a href="mailto:info@worknitive.com" className="px-6 py-3 bg-worknitive text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-worknitive/20 hover:scale-105 transition-all">
-                İletişime Geç
+                info@worknitive.com
               </a>
             </div>
           </div>
@@ -101,11 +108,16 @@ export const App: React.FC = () => {
         <Footer onLegalClick={(title, type) => navigateTo(`/${type === 'privacy' ? 'gizlilik' : type === 'kvkk' ? 'kvkk' : 'kullanim-sartlari'}`)} />
       </div>
     );
-  }
+  };
 
-  return (
+  const renderLandingPage = () => (
     <div className="min-h-screen bg-slate-50 selection:bg-worknitive selection:text-white">
-      <Header scrolled={scrolled} onDemoClick={handleDemoClick} />
+      <Header 
+        scrolled={scrolled} 
+        onDemoClick={handleDemoClick} 
+        currentPath={path}
+        onNavigate={navigateTo}
+      />
       
       <main>
         <Hero onDemoClick={handleDemoClick} />
@@ -127,4 +139,6 @@ export const App: React.FC = () => {
       {selectedPost && <BlogPostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
     </div>
   );
+
+  return isLegalPage ? renderLegalPage() : renderLandingPage();
 };
