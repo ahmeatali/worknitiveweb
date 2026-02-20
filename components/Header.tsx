@@ -14,9 +14,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
 
   const scrollToSection = (id: string) => {
     if (!isHome) {
-      // Önce ana sayfaya git
       onNavigate('/');
-      // Sayfa yüklendikten sonra scroll yap
+      // Give time for home page to mount
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
@@ -25,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
             behavior: 'smooth'
           });
         }
-      }, 50);
+      }, 100);
       return;
     }
     
