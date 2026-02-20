@@ -8,8 +8,7 @@ export const DashboardMockup: React.FC = () => {
       {/* Sidebar */}
       <div className="w-14 md:w-40 bg-[#f8fafc] border-r border-slate-200 p-4 hidden md:flex flex-col gap-6">
         <div className="mb-4">
-          {/* Logo artık şeffaf değil, tam netlikte görünecek */}
-          <Logo className="h-5 md:h-6" />
+          <Logo className="h-4 md:h-5" />
         </div>
         {[...Array(5)].map((_, i) => (
           <div key={i} className={`h-7 w-full rounded-lg flex items-center gap-3 px-2 ${i === 0 ? 'bg-worknitive text-white' : ''}`}>
