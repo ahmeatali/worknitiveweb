@@ -17,16 +17,29 @@ import { LegalContent } from './components/LegalModal';
 import { BlogPost } from './types';
 
 export const App: React.FC = () => {
+  const [path, setPath] = useState(window.location.pathname);
   const [scrolled, setScrolled] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [path, setPath] = useState(window.location.pathname);
 
-  // Sayfa değiştirme fonksiyonu (SPA Routing)
+  // Sayfa başlığını güncelleme (SEO için)
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      '/': 'Worknitive | İK ve Harcama Yönetimi',
+      '/gizlilik': 'Gizlilik Politikası | Worknitive',
+      '/kvkk': 'KVKK Aydınlatma Metni | Worknitive',
+      '/kullanim-sartlari': 'Kullanım Şartları | Worknitive'
+    };
+    document.title = titles[path] || 'Worknitive';
+  }, [path]);
+
+  // SPA Navigasyon Fonksiyonu
   const navigateTo = useCallback((newPath: string) => {
-    window.history.pushState({}, '', newPath);
-    setPath(newPath);
-    window.scrollTo(0, 0);
+    if (window.location.pathname !== newPath) {
+      window.history.pushState({}, '', newPath);
+      setPath(newPath);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
   }, []);
 
   const handleDemoClick = useCallback(() => {
@@ -42,20 +55,15 @@ export const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    const handleLocationChange = () => {
-      setPath(window.location.pathname);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handlePopState = () => setPath(window.location.pathname);
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('popstate', handlePopState);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('popstate', handlePopState);
     };
   }, []);
 
@@ -68,7 +76,7 @@ export const App: React.FC = () => {
 
   const activeLegal = legalRoutes[path];
 
-  // --- ALT SAYFA GÖRÜNÜMÜ ---
+  // --- ALT SAYFA RENDER (SUBPAGE) ---
   if (activeLegal) {
     return (
       <div className="min-h-screen bg-white selection:bg-worknitive selection:text-white flex flex-col">
@@ -81,10 +89,10 @@ export const App: React.FC = () => {
         
         <main className="flex-1 pt-32 pb-24">
           <div className="container mx-auto px-6 max-w-4xl">
-            {/* Breadcrumb / Navigasyon */}
+            {/* Navigasyon / Geri Dön */}
             <div className="mb-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
               <button onClick={() => navigateTo('/')} className="hover:text-worknitive transition-colors">Ana Sayfa</button>
-              <span>/</span>
+              <span className="opacity-30">/</span>
               <span className="text-slate-900">{activeLegal.title}</span>
             </div>
 
@@ -95,9 +103,9 @@ export const App: React.FC = () => {
             <div className="mt-12 text-center">
               <button 
                 onClick={() => navigateTo('/')}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-xl active:scale-95"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-xl active:scale-95"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Ana Sayfaya Dön
@@ -107,12 +115,12 @@ export const App: React.FC = () => {
         </main>
 
         <OfficeInfo />
-        <Footer onLegalClick={(title, type) => navigateTo(`/${type === 'privacy' ? 'gizlilik' : type === 'kvkk' ? 'kvkk' : 'kullanim-sartlari'}`)} />
+        <Footer onNavigate={navigateTo} />
       </div>
     );
   }
 
-  // --- ANA SAYFA GÖRÜNÜMÜ ---
+  // --- ANA SAYFA RENDER ---
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-worknitive selection:text-white">
       <Header 
@@ -136,7 +144,7 @@ export const App: React.FC = () => {
       </main>
 
       <OfficeInfo />
-      <Footer onLegalClick={(title, type) => navigateTo(`/${type === 'privacy' ? 'gizlilik' : type === 'kvkk' ? 'kvkk' : 'kullanim-sartlari'}`)} />
+      <Footer onNavigate={navigateTo} />
 
       {showDemo && <DemoModal onClose={() => setShowDemo(false)} />}
       {selectedPost && <BlogPostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
