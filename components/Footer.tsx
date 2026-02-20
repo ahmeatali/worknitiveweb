@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 lg:col-span-1">
             <Logo className="h-10 mb-8" />
-            <p className="text-slate-500 font-medium leading-relaxed max-w-xs">
+            <p className="text-slate-500 font-medium leading-relaxed max-w-xs text-sm">
               Yeni nesil İK, Harcama ve PDKS yönetim platformu. Operasyonel yükü AI ile dijitalleştirin.
             </p>
           </div>
@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
           </p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2 text-slate-300 text-[9px] font-black uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50 animate-pulse"></span>
               Sistem Durumu: Aktif
             </span>
           </div>
