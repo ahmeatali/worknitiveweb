@@ -22,7 +22,7 @@ export const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [path, setPath] = useState(window.location.pathname);
 
-  // Sayfa değiştirme ve URL güncelleme fonksiyonu
+  // Sayfa değiştirme fonksiyonu (SPA Routing)
   const navigateTo = useCallback((newPath: string) => {
     window.history.pushState({}, '', newPath);
     setPath(newPath);
@@ -59,17 +59,17 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Yasal sayfa rotaları tanımları
+  // Yasal sayfa rotaları
   const legalRoutes: Record<string, { title: string; type: 'privacy' | 'kvkk' | 'terms' }> = {
     '/gizlilik': { title: 'Gizlilik Politikası', type: 'privacy' },
     '/kvkk': { title: 'KVKK Aydınlatma Metni', type: 'kvkk' },
     '/kullanim-sartlari': { title: 'Kullanım Şartları', type: 'terms' }
   };
 
-  const currentLegal = legalRoutes[path];
+  const activeLegal = legalRoutes[path];
 
-  // --- YASAL SAYFA RENDER ---
-  if (currentLegal) {
+  // --- ALT SAYFA GÖRÜNÜMÜ ---
+  if (activeLegal) {
     return (
       <div className="min-h-screen bg-white selection:bg-worknitive selection:text-white flex flex-col">
         <Header 
@@ -81,31 +81,27 @@ export const App: React.FC = () => {
         
         <main className="flex-1 pt-32 pb-24">
           <div className="container mx-auto px-6 max-w-4xl">
-            {/* Navigasyon / Geri Dön */}
-            <button 
-              onClick={() => navigateTo('/')}
-              className="group mb-12 flex items-center gap-2 text-slate-400 hover:text-worknitive font-black text-[10px] uppercase tracking-[0.2em] transition-all"
-            >
-              <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-              </svg>
-              Ana Sayfaya Dön
-            </button>
+            {/* Breadcrumb / Navigasyon */}
+            <div className="mb-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+              <button onClick={() => navigateTo('/')} className="hover:text-worknitive transition-colors">Ana Sayfa</button>
+              <span>/</span>
+              <span className="text-slate-900">{activeLegal.title}</span>
+            </div>
 
-            {/* Belge İçeriği */}
             <article className="bg-slate-50 p-10 md:p-20 rounded-[4rem] border border-slate-100 shadow-sm animate-fadeIn">
-              <LegalContent type={currentLegal.type} />
+              <LegalContent type={activeLegal.type} />
             </article>
 
-            {/* Sayfa Altı Aksiyon */}
-            <div className="mt-12 p-8 bg-worknitive/5 rounded-[2.5rem] border border-worknitive/10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <h5 className="font-bold text-slate-900 mb-1 text-sm uppercase tracking-tight">Hukuki sorularınız için;</h5>
-                <p className="text-xs text-slate-500 font-medium tracking-tight">Bizimle info@worknitive.com üzerinden iletişime geçebilirsiniz.</p>
-              </div>
-              <a href="mailto:info@worknitive.com" className="px-6 py-3 bg-worknitive text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-worknitive/20 hover:scale-105 transition-all">
-                Bize Yazın
-              </a>
+            <div className="mt-12 text-center">
+              <button 
+                onClick={() => navigateTo('/')}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-xl active:scale-95"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Ana Sayfaya Dön
+              </button>
             </div>
           </div>
         </main>
@@ -116,7 +112,7 @@ export const App: React.FC = () => {
     );
   }
 
-  // --- ANA SAYFA RENDER ---
+  // --- ANA SAYFA GÖRÜNÜMÜ ---
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-worknitive selection:text-white">
       <Header 
