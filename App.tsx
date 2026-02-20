@@ -22,7 +22,7 @@ export const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [path, setPath] = useState(window.location.pathname);
 
-  // Sayfa değiştirme fonksiyonu
+  // Sayfa değiştirme ve URL güncelleme fonksiyonu
   const navigateTo = useCallback((newPath: string) => {
     window.history.pushState({}, '', newPath);
     setPath(newPath);
@@ -59,13 +59,17 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Yasal sayfa rotaları
-  const isLegalPage = ['/gizlilik', '/kvkk', '/kullanim-sartlari'].includes(path);
+  // Yasal sayfa rotaları tanımları
+  const legalRoutes: Record<string, { title: string; type: 'privacy' | 'kvkk' | 'terms' }> = {
+    '/gizlilik': { title: 'Gizlilik Politikası', type: 'privacy' },
+    '/kvkk': { title: 'KVKK Aydınlatma Metni', type: 'kvkk' },
+    '/kullanim-sartlari': { title: 'Kullanım Şartları', type: 'terms' }
+  };
 
-  // Render Logic
-  const renderLegalPage = () => {
-    const type = path === '/gizlilik' ? 'privacy' : path === '/kvkk' ? 'kvkk' : 'terms';
-    
+  const currentLegal = legalRoutes[path];
+
+  // --- YASAL SAYFA RENDER ---
+  if (currentLegal) {
     return (
       <div className="min-h-screen bg-white selection:bg-worknitive selection:text-white flex flex-col">
         <Header 
@@ -88,17 +92,19 @@ export const App: React.FC = () => {
               Ana Sayfaya Dön
             </button>
 
+            {/* Belge İçeriği */}
             <article className="bg-slate-50 p-10 md:p-20 rounded-[4rem] border border-slate-100 shadow-sm animate-fadeIn">
-              <LegalContent type={type as 'privacy' | 'kvkk' | 'terms'} />
+              <LegalContent type={currentLegal.type} />
             </article>
 
+            {/* Sayfa Altı Aksiyon */}
             <div className="mt-12 p-8 bg-worknitive/5 rounded-[2.5rem] border border-worknitive/10 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
-                <h5 className="font-bold text-slate-900 mb-1 text-sm uppercase tracking-tight">Hukuki bir sorunuz mu var?</h5>
-                <p className="text-xs text-slate-500 font-medium tracking-tight">Süreçlerimiz hakkında daha fazla bilgi almak için hukuk ekibimizle iletişime geçebilirsiniz.</p>
+                <h5 className="font-bold text-slate-900 mb-1 text-sm uppercase tracking-tight">Hukuki sorularınız için;</h5>
+                <p className="text-xs text-slate-500 font-medium tracking-tight">Bizimle info@worknitive.com üzerinden iletişime geçebilirsiniz.</p>
               </div>
               <a href="mailto:info@worknitive.com" className="px-6 py-3 bg-worknitive text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-worknitive/20 hover:scale-105 transition-all">
-                info@worknitive.com
+                Bize Yazın
               </a>
             </div>
           </div>
@@ -108,9 +114,10 @@ export const App: React.FC = () => {
         <Footer onLegalClick={(title, type) => navigateTo(`/${type === 'privacy' ? 'gizlilik' : type === 'kvkk' ? 'kvkk' : 'kullanim-sartlari'}`)} />
       </div>
     );
-  };
+  }
 
-  const renderLandingPage = () => (
+  // --- ANA SAYFA RENDER ---
+  return (
     <div className="min-h-screen bg-slate-50 selection:bg-worknitive selection:text-white">
       <Header 
         scrolled={scrolled} 
@@ -139,6 +146,4 @@ export const App: React.FC = () => {
       {selectedPost && <BlogPostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
     </div>
   );
-
-  return isLegalPage ? renderLegalPage() : renderLandingPage();
 };
