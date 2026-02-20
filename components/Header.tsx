@@ -14,9 +14,18 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
 
   const scrollToSection = (id: string) => {
     if (!isHome) {
+      // Eğer ana sayfada değilsek, ana sayfaya gidip çapaya zıpla
       onNavigate('/#' + id);
+      // Kısa bir bekleme ile scroll işlemini yap (popstate tetiklendiğinde App ana sayfaya geçer)
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
+        }
+      }, 100);
       return;
     }
+    
     const element = document.getElementById(id);
     if (element) {
       const offset = scrolled ? 80 : 100;
@@ -80,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
             onClick={onDemoClick}
             className="px-6 md:px-8 py-3 bg-worknitive text-white rounded-xl font-bold text-sm hover:bg-worknitive-dark transition-all shadow-lg shadow-worknitive/20 active:scale-95"
           >
-            <span className="hidden sm:inline">Ücretsiz</span> Demo Al
+            Demo Al
           </button>
         </div>
       </div>
