@@ -3,13 +3,13 @@ import React from 'react';
 import { Logo } from './Logo';
 
 interface FooterProps {
-  onLegalClick: (title: string, type: 'privacy' | 'kvkk' | 'terms') => void;
+  onNavigate: (path: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
-  const handleLegalLink = (e: React.MouseEvent, title: string, type: 'privacy' | 'kvkk' | 'terms') => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
-    onLegalClick(title, type);
+    onNavigate(path);
   };
 
   return (
@@ -26,9 +26,9 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
           <div>
             <h5 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-6">Hızlı Erişim</h5>
             <ul className="space-y-4">
-              <li><a href="/#features" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Çözümler</a></li>
-              <li><a href="/#how-it-works" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Nasıl Çalışır?</a></li>
-              <li><a href="/#blog" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Blog & Insight</a></li>
+              <li><a href="/" onClick={(e) => handleLinkClick(e, '/')} className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Ana Sayfa</a></li>
+              <li><button onClick={() => { onNavigate('/'); setTimeout(() => document.getElementById('features')?.scrollIntoView({behavior:'smooth'}), 100); }} className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Çözümler</button></li>
+              <li><button onClick={() => { onNavigate('/'); setTimeout(() => document.getElementById('blog')?.scrollIntoView({behavior:'smooth'}), 100); }} className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Blog & Insight</button></li>
             </ul>
           </div>
 
@@ -38,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/gizlilik" 
-                  onClick={(e) => handleLegalLink(e, 'Gizlilik Politikası', 'privacy')}
+                  onClick={(e) => handleLinkClick(e, '/gizlilik')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Gizlilik Politikası
@@ -47,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/kvkk" 
-                  onClick={(e) => handleLegalLink(e, 'KVKK Aydınlatma Metni', 'kvkk')}
+                  onClick={(e) => handleLinkClick(e, '/kvkk')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   KVKK Aydınlatma Metni
@@ -56,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/kullanim-sartlari" 
-                  onClick={(e) => handleLegalLink(e, 'Kullanım Şartları', 'terms')}
+                  onClick={(e) => handleLinkClick(e, '/kullanim-sartlari')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Kullanım Şartları
