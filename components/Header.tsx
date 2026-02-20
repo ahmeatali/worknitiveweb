@@ -14,9 +14,9 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
 
   const scrollToSection = (id: string) => {
     if (!isHome) {
-      // Eğer bir subpage üzerindeysek önce ana sayfaya git
+      // Önce ana sayfaya git
       onNavigate('/');
-      // Sayfa yüklendikten kısa süre sonra scroll yap
+      // Sayfa yüklendikten sonra scroll yap
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
             behavior: 'smooth'
           });
         }
-      }, 100);
+      }, 50);
       return;
     }
     
@@ -39,7 +39,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
     }
   };
 
-  const handleLogoClick = () => {
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (isHome) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -50,15 +51,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-6'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <div 
+        <a 
+          href="/"
           onClick={handleLogoClick} 
           className="cursor-pointer group flex items-center shrink-0"
         >
           <Logo className={scrolled ? "h-10 md:h-12" : "h-12 md:h-16"} />
-        </div>
+        </a>
 
-        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
           {['features', 'how-it-works', 'blog', 'faq'].map((id) => (
             <button 
@@ -71,7 +71,6 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPa
           ))}
         </nav>
 
-        {/* Action Button */}
         <div className="flex items-center gap-4">
           <button 
             onClick={onDemoClick}
