@@ -2,7 +2,11 @@
 import React from 'react';
 import { Logo } from './Logo';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onLegalClick: (title: string, type: 'privacy' | 'kvkk' | 'terms') => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
   return (
     <footer className="bg-white border-t border-slate-100 pt-20 pb-10">
       <div className="container mx-auto px-4 md:px-6">
@@ -51,9 +55,15 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Yasal</h4>
             <ul className="space-y-4">
-              {['KVKK Politikası', 'Gizlilik', 'Kullanım Şartları', 'Çerezler'].map(l => (
-                <li key={l}><a href="#" className="text-slate-500 text-sm hover:text-worknitive">{l}</a></li>
-              ))}
+              <li>
+                <button onClick={() => onLegalClick('KVKK Politikası', 'kvkk')} className="text-slate-500 text-sm hover:text-worknitive">KVKK Politikası</button>
+              </li>
+              <li>
+                <button onClick={() => onLegalClick('Gizlilik Politikası', 'privacy')} className="text-slate-500 text-sm hover:text-worknitive">Gizlilik</button>
+              </li>
+              <li>
+                <button onClick={() => onLegalClick('Kullanım Şartları', 'terms')} className="text-slate-500 text-sm hover:text-worknitive">Kullanım Şartları</button>
+              </li>
             </ul>
           </div>
         </div>
