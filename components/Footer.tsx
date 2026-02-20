@@ -7,6 +7,11 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
+  const handleLegalLink = (e: React.MouseEvent, title: string, type: 'privacy' | 'kvkk' | 'terms') => {
+    e.preventDefault();
+    onLegalClick(title, type);
+  };
+
   return (
     <footer className="bg-white pt-24 pb-12 border-t border-slate-50">
       <div className="container mx-auto px-6">
@@ -33,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/gizlilik" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('Gizlilik Politikası', 'privacy'); }}
+                  onClick={(e) => handleLegalLink(e, 'Gizlilik Politikası', 'privacy')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Gizlilik Politikası
@@ -42,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/kvkk" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('KVKK Aydınlatma Metni', 'kvkk'); }}
+                  onClick={(e) => handleLegalLink(e, 'KVKK Aydınlatma Metni', 'kvkk')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   KVKK Aydınlatma Metni
@@ -51,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               <li>
                 <a 
                   href="/kullanim-sartlari" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('Kullanım Şartları', 'terms'); }}
+                  onClick={(e) => handleLegalLink(e, 'Kullanım Şartları', 'terms')}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Kullanım Şartları
