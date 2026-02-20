@@ -75,7 +75,7 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-slate-50">
-          <p className="text-slate-300 text-[10px] font-black uppercase tracking-[0.4em]">
+          <p className="text-slate-300 text-[9px] font-black uppercase tracking-[0.4em]">
             © 2025 WORKNITIVE BİLİŞİM VE TİCARET A.Ş.
           </p>
           <div className="flex items-center gap-6">
