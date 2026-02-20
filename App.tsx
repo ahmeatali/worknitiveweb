@@ -6,14 +6,21 @@ import { FeatureGrid } from './components/FeatureGrid';
 import { HowItWorks } from './components/HowItWorks';
 import { ProductShowcase } from './components/ProductShowcase';
 import { MobileAppSection } from './components/MobileAppSection';
+import { Blog } from './components/Blog';
+import { BlogPostDetail } from './components/BlogPostDetail';
 import { Faq } from './components/Faq';
 import { FinalCTA } from './components/FinalCTA';
 import { DemoModal } from './components/DemoModal';
 import { OfficeInfo } from './components/OfficeInfo';
+import { Footer } from './components/Footer';
+import { LegalModal } from './components/LegalModal';
+import { BlogPost } from './types';
 
 export const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [legalModal, setLegalModal] = useState<{ title: string; type: 'privacy' | 'kvkk' | 'terms' } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,25 +48,29 @@ export const App: React.FC = () => {
       
       <main>
         <Hero onDemoClick={handleDemoClick} />
-        
         <ProductShowcase />
-        
         <MobileAppSection />
-        
         <div id="features">
           <FeatureGrid />
         </div>
-
         <HowItWorks />
-
+        <Blog onPostClick={(post) => setSelectedPost(post)} />
         <Faq />
-
         <FinalCTA onDemoClick={handleDemoClick} />
       </main>
 
+      <Footer onLegalClick={(title, type) => setLegalModal({ title, type })} />
       <OfficeInfo />
 
       {showDemo && <DemoModal onClose={() => setShowDemo(false)} />}
+      {selectedPost && <BlogPostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
+      {legalModal && (
+        <LegalModal 
+          title={legalModal.title} 
+          type={legalModal.type} 
+          onClose={() => setLegalModal(null)} 
+        />
+      )}
     </div>
   );
 };
