@@ -8,77 +8,75 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
   return (
-    <footer className="bg-white border-t border-slate-100 pt-20 pb-10">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-16">
-          <div className="col-span-2">
-            <Logo className="h-10 mb-6" />
-            <p className="text-slate-500 max-w-sm mb-8">
-              B2B SaaS platformumuzla harcama, PDKS, izin ve puantaj süreçlerini tek noktada birleştirerek İK ve finans operasyonlarını dijitalleştiriyoruz.
+    <footer className="bg-white pt-24 pb-12 border-t border-slate-50">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          <div className="col-span-1 lg:col-span-1">
+            <Logo className="h-10 mb-8" />
+            <p className="text-slate-500 font-medium leading-relaxed max-w-xs">
+              Yeni nesil İK, Harcama ve PDKS yönetim platformu. Operasyonel yükü AI ile dijitalleştirin.
             </p>
-            <div className="flex items-center gap-4">
-              {['twitter', 'linkedin', 'instagram'].map((s) => (
-                <div key={s} className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-worknitive hover:border-worknitive transition-all cursor-pointer">
-                  <span className="capitalize text-[10px] font-bold">{s[0]}</span>
-                </div>
-              ))}
-            </div>
           </div>
-
+          
           <div>
-            <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Ürün</h4>
+            <h5 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-6">Hızlı Erişim</h5>
             <ul className="space-y-4">
-              {['Harcama Yönetimi', 'PDKS', 'İzin Takibi', 'Puantaj', 'Entegrasyonlar'].map(l => (
-                <li key={l}><a href="#" className="text-slate-500 text-sm hover:text-worknitive">{l}</a></li>
-              ))}
+              <li><a href="#features" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Çözümler</a></li>
+              <li><a href="#how-it-works" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Nasıl Çalışır?</a></li>
+              <li><a href="#blog" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Blog & Insight</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Şirket</h4>
+            <h5 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-6">Yasal Linkler</h5>
             <ul className="space-y-4">
-              {['Hakkımızda', 'Kariyer', 'Basın Kiti', 'İletişim'].map(l => (
-                <li key={l}><a href="#" className="text-slate-500 text-sm hover:text-worknitive">{l}</a></li>
-              ))}
+              <li>
+                <a 
+                  href="#gizlilik" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('Gizlilik Politikası', 'privacy'); window.location.hash = 'gizlilik'; }}
+                  className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
+                >
+                  Gizlilik Politikası
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#kvkk" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('KVKK Aydınlatma Metni', 'kvkk'); window.location.hash = 'kvkk'; }}
+                  className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
+                >
+                  KVKK Aydınlatma Metni
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="#kullanim-sartlari" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('Kullanım Şartları', 'terms'); window.location.hash = 'kullanim-sartlari'; }}
+                  className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
+                >
+                  Kullanım Şartları
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Kaynaklar</h4>
+            <h5 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-6">İletişim</h5>
             <ul className="space-y-4">
-              {['Blog', 'Yardım Merkezi', 'API Dökümanı', 'Sistem Durumu'].map(l => (
-                <li key={l}><a href="#" className="text-slate-500 text-sm hover:text-worknitive">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Yasal</h4>
-            <ul className="space-y-4">
-              <li>
-                <button onClick={() => onLegalClick('KVKK Politikası', 'kvkk')} className="text-slate-500 text-sm hover:text-worknitive">KVKK Politikası</button>
-              </li>
-              <li>
-                <button onClick={() => onLegalClick('Gizlilik Politikası', 'privacy')} className="text-slate-500 text-sm hover:text-worknitive">Gizlilik</button>
-              </li>
-              <li>
-                <button onClick={() => onLegalClick('Kullanım Şartları', 'terms')} className="text-slate-500 text-sm hover:text-worknitive">Kullanım Şartları</button>
-              </li>
+              <li><a href="mailto:info@worknitive.com" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">info@worknitive.com</a></li>
+              <li className="text-slate-400 font-bold text-sm">Gebze Yerleşkesi, Kocaeli / TR</li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-10 border-t border-slate-50 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-slate-400 text-sm">
-            © 2025 Worknitive Bilişim ve Ticaret A.Ş. Tüm hakları saklıdır.
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-slate-50">
+          <p className="text-slate-300 text-[10px] font-black uppercase tracking-[0.4em]">
+            © 2025 WORKNITIVE BİLİŞİM VE TİCARET A.Ş.
           </p>
-          <div className="flex items-center gap-6 text-slate-500 text-sm font-medium">
-             <span>info@worknitive.com</span>
-          </div>
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2 text-slate-400 text-xs">
-              <span className="w-2 h-2 rounded-full bg-green-500"></span>
-              Tüm Sistemler Aktif
+            <span className="flex items-center gap-2 text-slate-300 text-[9px] font-black uppercase tracking-widest">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
+              Sistem Durumu: Aktif
             </span>
           </div>
         </div>
