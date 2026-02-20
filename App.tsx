@@ -25,7 +25,7 @@ export const App: React.FC = () => {
   // Sayfa başlığını güncelleme (SEO için)
   useEffect(() => {
     const titles: Record<string, string> = {
-      '/': 'Worknitive | İK ve Harcama Yönetimi',
+      '/': 'Worknitive | Yeni Nesil İK ve Harcama Yönetimi',
       '/gizlilik': 'Gizlilik Politikası | Worknitive',
       '/kvkk': 'KVKK Aydınlatma Metni | Worknitive',
       '/kullanim-sartlari': 'Kullanım Şartları | Worknitive'
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
     if (window.location.pathname !== newPath) {
       window.history.pushState({}, '', newPath);
       setPath(newPath);
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, []);
 
@@ -90,17 +90,24 @@ export const App: React.FC = () => {
         <main className="flex-1 pt-32 pb-24">
           <div className="container mx-auto px-6 max-w-4xl">
             {/* Navigasyon / Geri Dön */}
-            <div className="mb-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-              <button onClick={() => navigateTo('/')} className="hover:text-worknitive transition-colors">Ana Sayfa</button>
+            <nav className="mb-12 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+              <button 
+                onClick={() => navigateTo('/')}
+                className="hover:text-worknitive transition-colors"
+              >
+                Ana Sayfa
+              </button>
               <span className="opacity-30">/</span>
               <span className="text-slate-900">{activeLegal.title}</span>
-            </div>
+            </nav>
 
+            {/* Document Content */}
             <article className="bg-slate-50 p-10 md:p-20 rounded-[4rem] border border-slate-100 shadow-sm animate-fadeIn">
               <LegalContent type={activeLegal.type} />
             </article>
 
-            <div className="mt-12 text-center">
+            {/* Bottom Actions */}
+            <div className="mt-16 text-center">
               <button 
                 onClick={() => navigateTo('/')}
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-xl active:scale-95"
