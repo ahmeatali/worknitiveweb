@@ -26,8 +26,28 @@ export const App: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
+
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#gizlilik') {
+        setLegalModal({ title: 'Gizlilik Politikası', type: 'privacy' });
+      } else if (hash === '#kvkk') {
+        setLegalModal({ title: 'KVKK Aydınlatma Metni', type: 'kvkk' });
+      } else if (hash === '#kullanim-sartlari') {
+        setLegalModal({ title: 'Kullanım Şartları', type: 'terms' });
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Initial check
+    handleHashChange();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const handleDemoClick = () => {
@@ -40,6 +60,12 @@ export const App: React.FC = () => {
     } else {
       setShowDemo(true);
     }
+  };
+
+  const closeLegalModal = () => {
+    setLegalModal(null);
+    // Clear hash without jump
+    history.replaceState(null, "", window.location.pathname + window.location.search);
   };
 
   return (
@@ -59,8 +85,9 @@ export const App: React.FC = () => {
         <FinalCTA onDemoClick={handleDemoClick} />
       </main>
 
-      <Footer onLegalClick={(title, type) => setLegalModal({ title, type })} />
+      {/* Modern SaaS Akışı: Adres Kartı -> Footer Linkleri */}
       <OfficeInfo />
+      <Footer onLegalClick={(title, type) => setLegalModal({ title, type })} />
 
       {showDemo && <DemoModal onClose={() => setShowDemo(false)} />}
       {selectedPost && <BlogPostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
@@ -68,7 +95,7 @@ export const App: React.FC = () => {
         <LegalModal 
           title={legalModal.title} 
           type={legalModal.type} 
-          onClose={() => setLegalModal(null)} 
+          onClose={closeLegalModal} 
         />
       )}
     </div>
