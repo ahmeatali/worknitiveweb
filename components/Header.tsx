@@ -5,10 +5,18 @@ import { Logo } from './Logo';
 interface HeaderProps {
   scrolled: boolean;
   onDemoClick: () => void;
+  currentPath: string;
+  onNavigate: (path: string) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
+export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick, currentPath, onNavigate }) => {
+  const isHome = currentPath === '/' || currentPath === '';
+
   const scrollToSection = (id: string) => {
+    if (!isHome) {
+      onNavigate('/#' + id);
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       const offset = scrolled ? 80 : 100;
@@ -19,12 +27,20 @@ export const Header: React.FC<HeaderProps> = ({ scrolled, onDemoClick }) => {
     }
   };
 
+  const handleLogoClick = () => {
+    if (isHome) {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    } else {
+      onNavigate('/');
+    }
+  };
+
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl py-3 shadow-xl shadow-slate-900/5 border-b border-slate-100' : 'py-6'}`}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo Bölümü */}
         <div 
-          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} 
+          onClick={handleLogoClick} 
           className="cursor-pointer group flex items-center shrink-0"
         >
           <Logo className={scrolled ? "h-10 md:h-12" : "h-12 md:h-16"} />
