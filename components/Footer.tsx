@@ -21,9 +21,9 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
           <div>
             <h5 className="text-slate-900 font-black text-xs uppercase tracking-widest mb-6">Hızlı Erişim</h5>
             <ul className="space-y-4">
-              <li><a href="#features" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Çözümler</a></li>
-              <li><a href="#how-it-works" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Nasıl Çalışır?</a></li>
-              <li><a href="#blog" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Blog & Insight</a></li>
+              <li><a href="/#features" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Çözümler</a></li>
+              <li><a href="/#how-it-works" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Nasıl Çalışır?</a></li>
+              <li><a href="/#blog" className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors">Blog & Insight</a></li>
             </ul>
           </div>
 
@@ -32,8 +32,8 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="#gizlilik" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('Gizlilik Politikası', 'privacy'); window.location.hash = 'gizlilik'; }}
+                  href="/gizlilik" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('Gizlilik Politikası', 'privacy'); }}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Gizlilik Politikası
@@ -41,8 +41,8 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               </li>
               <li>
                 <a 
-                  href="#kvkk" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('KVKK Aydınlatma Metni', 'kvkk'); window.location.hash = 'kvkk'; }}
+                  href="/kvkk" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('KVKK Aydınlatma Metni', 'kvkk'); }}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   KVKK Aydınlatma Metni
@@ -50,8 +50,8 @@ export const Footer: React.FC<FooterProps> = ({ onLegalClick }) => {
               </li>
               <li>
                 <a 
-                  href="#kullanim-sartlari" 
-                  onClick={(e) => { e.preventDefault(); onLegalClick('Kullanım Şartları', 'terms'); window.location.hash = 'kullanim-sartlari'; }}
+                  href="/kullanim-sartlari" 
+                  onClick={(e) => { e.preventDefault(); onLegalClick('Kullanım Şartları', 'terms'); }}
                   className="text-slate-400 hover:text-worknitive font-bold text-sm transition-colors"
                 >
                   Kullanım Şartları
