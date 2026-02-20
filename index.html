@@ -15,7 +15,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" type="image/png" href="/favicon.png">
     
-    <!-- Open Graph (Sosyal Medya Paylaşımları İçin) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Worknitive | İK Süreçlerinde Zekayı Hissedin">
     <meta property="og:description" content="AI destekli İK ve Finans yönetim platformu ile operasyonel yükünüzü %40 azaltın.">
     <meta property="og:type" content="website">
@@ -58,18 +58,28 @@
         }
         .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
         
-        * { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-scaleIn { animation: scaleIn 0.3s ease-out forwards; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
     </style>
+
 <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@19.0.0",
-    "react/": "https://esm.sh/react@19.0.0/",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
     "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4"
   }
 }
 </script>
@@ -79,17 +89,19 @@
     function initApollo(){
         var n=Math.random().toString(36).substring(7),o=document.createElement("script");
         o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-        o.onload=function(){window.trackingFunctions.onLoad({appId:"697b20b146a903001d2ee033"})},
+        o.onload=function(){
+            if(window.trackingFunctions) {
+                window.trackingFunctions.onLoad({appId:"697b20b146a903001d2ee033"});
+            }
+        },
         document.head.appendChild(o)
     }
     initApollo();
 </script>
 
-<link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
